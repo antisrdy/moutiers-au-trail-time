@@ -1,16 +1,18 @@
-from utils import load_df
-
 import streamlit as st
+from config import DF_STARTING_TIMES
+from utils import get_df
 
 st.set_page_config(
-    page_title='Moutiers-au-Trail',
-    page_icon='🏃‍♀️🏃',
+    page_title="Moutiers-au-Trail",
+    page_icon="🏃‍♀️🏃",
 )
 
-st.write('# Welcome to Moutiers-au-Trail! 👋')
+df_participants = get_df("participants")
 
-df_participants = load_df('participants')
-st.session_state['participants'] = df_participants
+st.title("Welcome to Moutiers-au-Trail! 👋")
 
-st.text("Liste initiale des participants :")
-st.dataframe(st.session_state['participants'])
+st.write("Programme de la journée :")
+st.dataframe(DF_STARTING_TIMES, hide_index=True)
+
+st.write("Liste initiale des participants :")
+st.dataframe(df_participants)
